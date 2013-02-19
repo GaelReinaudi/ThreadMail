@@ -14,6 +14,8 @@
 #include <QtCore/QDir>
 #include <QtQml/QQmlEngine>
 
+#include "conversation.h"
+
 class QtQuick2ApplicationViewerPrivate
 {
     QString mainQmlFile;
@@ -51,13 +53,13 @@ QtQuick2ApplicationViewer::~QtQuick2ApplicationViewer()
 
 void QtQuick2ApplicationViewer::setMainQmlFile(const QString &file)
 {
-    d->mainQmlFile = QtQuick2ApplicationViewerPrivate::adjustPath(file);
-    setSource(QUrl::fromLocalFile(d->mainQmlFile));
+	d->mainQmlFile = QtQuick2ApplicationViewerPrivate::adjustPath(file);
+	setSource(QUrl::fromLocalFile(d->mainQmlFile));
 }
 
 void QtQuick2ApplicationViewer::addImportPath(const QString &path)
 {
-    engine()->addImportPath(QtQuick2ApplicationViewerPrivate::adjustPath(path));
+	engine()->addImportPath(QtQuick2ApplicationViewerPrivate::adjustPath(path));
 }
 
 void QtQuick2ApplicationViewer::showExpanded()
@@ -67,4 +69,11 @@ void QtQuick2ApplicationViewer::showExpanded()
 #else
     show();
 #endif
+}
+
+void QtQuick2ApplicationViewer::MakeConversation()
+{
+	Conversation theConv;
+
+
 }

@@ -12,22 +12,32 @@
 #define QTQUICK2APPLICATIONVIEWER_H
 
 #include <QtQuick/QQuickView>
+#include <QQmlEngine>
 
 class QtQuick2ApplicationViewer : public QQuickView
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
-    explicit QtQuick2ApplicationViewer(QWindow *parent = 0);
-    virtual ~QtQuick2ApplicationViewer();
+	explicit QtQuick2ApplicationViewer(QWindow *parent = 0);
+	virtual ~QtQuick2ApplicationViewer();
 
-    void setMainQmlFile(const QString &file);
-    void addImportPath(const QString &path);
+	void setMainQmlFile(const QString &file);
+	void addImportPath(const QString &path);
+	void showExpanded();
 
-    void showExpanded();
+	void MakeConversation();
 
+public slots:
+	void ReloadQmlFile() {
+
+		setMainQmlFile(m_QmlFile);
+	}
+
+public:
+	QString m_QmlFile;
 private:
-    class QtQuick2ApplicationViewerPrivate *d;
+	class QtQuick2ApplicationViewerPrivate *d;
 };
 
 #endif // QTQUICK2APPLICATIONVIEWER_H

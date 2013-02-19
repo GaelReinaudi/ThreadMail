@@ -12,6 +12,7 @@ Rectangle {
 
 	Text {
 		text: qsTr("Hello World")
+        color: "white"
 		anchors.centerIn: parent
 	}
 

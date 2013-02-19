@@ -3,11 +3,11 @@
 
 #include <QObject>
 
-class message : public QObject
+class Message : public QObject
 {
     Q_OBJECT
 public:
-    explicit message(QObject *parent = 0);
+	explicit Message(QObject *parent = 0);
     
 signals:
     

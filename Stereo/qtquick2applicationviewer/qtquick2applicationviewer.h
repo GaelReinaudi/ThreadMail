@@ -30,7 +30,7 @@ public:
 
 public slots:
 	void ReloadQmlFile() {
-
+		engine()->clearComponentCache();
 		setMainQmlFile(m_QmlFile);
 	}
 

@@ -2,7 +2,7 @@ import QtQuick 2.0
 
 Rectangle {
 
-	width: 200
+	width: 400
 	height: 800
 
 	Image{
@@ -11,7 +11,7 @@ Rectangle {
 	}
 
 	Text {
-		text: qsTr("Hello Worlddd")
+		text: qsTr("Hello Worldddd")
         color: "white"
 		anchors.centerIn: parent
 	}

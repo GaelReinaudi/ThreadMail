@@ -1,6 +1,6 @@
 #include "message.h"
 
-message::message(QObject *parent) :
+Message::Message(QObject *parent) :
     QObject(parent)
 {
 }

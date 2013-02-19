@@ -14,7 +14,7 @@
 #include <QtCore/QDir>
 #include <QtQml/QQmlEngine>
 
-#include "conversation.h"
+#include "../conversation.h"
 
 class QtQuick2ApplicationViewerPrivate
 {

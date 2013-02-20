@@ -1,4 +1,6 @@
 import QtQuick 2.0
+import basalt.Message 1.0
+import basalt.Conversation 1.0
 
 Rectangle {
 
@@ -23,11 +25,42 @@ Rectangle {
 			color: "red";
 			width: parent.width / 2;
 			height: parent.height;
+
+			ListView {
+				id: listttt
+				anchors.fill: parent
+				//model: conv.messages
+
+				delegate: Rectangle {
+					width: parent.width;
+					height: 30
+					border.width: 1
+					color: "lightsteelblue"
+					Text {
+						anchors.centerIn: parent
+						text: model.modelData.body
+					}
+				}
+
+				add: Transition {
+					NumberAnimation { property: "opacity"; from: 0; to: 1.0; duration: 400 }
+					NumberAnimation { property: "scale"; from: 0; to: 1.0; duration: 400 }
+				}
+
+				displaced: Transition {
+					NumberAnimation { properties: "x,y"; duration: 400; easing.type: Easing.OutBounce }
+				}
+
+				focus: true
+				Keys.onSpacePressed: model.insert(0, { "name": "Item " + model.count })
+			}
 		}
 	}
 
 	Text {
-		text: qsTr("Hello Worldddd")
+		id: textttt
+		text: "Hello"
+		//text: thread.messages[0].body;
 		color: "white"
 		anchors.centerIn: parent
 	}
@@ -36,8 +69,8 @@ Rectangle {
 	MouseArea {
 		anchors.fill: parent
 		onClicked: {
-			thread.messages;
-			Qt.quit();
+			listttt.model = conv.messages
+//			Qt.quit();
 		}
 	}
 

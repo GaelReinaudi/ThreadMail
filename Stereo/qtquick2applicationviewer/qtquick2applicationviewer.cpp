@@ -74,13 +74,13 @@ void QtQuick2ApplicationViewer::showExpanded()
 
 void QtQuick2ApplicationViewer::MakeConversation()
 {
-    Conversation* pConv = new Conversation(this);
-    rootContext()->setContextProperty("thread", pConv);
+	Conversation* pConv = new Conversation(this);
+	rootContext()->setContextProperty("conv", pConv);
 
 
-    pConv->addMessage(new Message(this, "blaaaaaaaaaaaaaaaaaaaaaaaaaaa"));
-    pConv->addMessage(new Message(this, "blaasafsdfasfsfsaaaaaa"));
-    pConv->addMessage(new Message(this, "blaaaaaaaaaaaaaaaaaagrtwqtwetgwrgsaaaaaa"));
-    pConv->addMessage(new Message(this, "blaaaaaaaaaaaaaaaaaaaaaaafsgsagasgaaaa"));
-    pConv->addMessage(new Message(this, "blaaaaaaaaaaaaaaaaaaaaaaaasadgasdgsdgawrghqrwhgqrhgrecv65148f98w17f8aaa"));
+	pConv->addMessage(new Message(this, "blaaaaaaaaaaaaaaaaaaaaaaaaaaa"));
+	pConv->addMessage(new Message(this, "blaasafsdfasfsfsaaaaaa"));
+	pConv->addMessage(new Message(this, "blaaaaaaaaaaaaaaaaaagrtwqtwetgwrgsaaaaaa"));
+	pConv->addMessage(new Message(this, "blaaaaaaaaaaaaaaaaaaaaaaafsgsagasgaaaa"));
+	pConv->addMessage(new Message(this, "blaaaaaaaaaaaaaaaaaaaaaaaasadgasdgsdgawrghqrwhgqrhgrecv65148f98w17f8aaa"));
 }

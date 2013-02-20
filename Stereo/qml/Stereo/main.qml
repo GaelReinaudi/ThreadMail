@@ -40,7 +40,7 @@ Rectangle {
 
 			ListView {
 				id: listttt
-//				model: conv.messages
+				model: conv.messages
 				anchors.fill: parent
                 anchors.margins: 15
                 spacing: 15
@@ -82,10 +82,12 @@ Rectangle {
 		}
 	}
 
+
 	MouseArea {
 		anchors.fill: parent
 		onClicked: {
-			listttt.model = conv.messages
+//			listttt.model = conv.messages
+			Qt.quit()
 		}
 	}
     DropShadow {

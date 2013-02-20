@@ -8,14 +8,17 @@ class Message : public QObject
 {
     Q_OBJECT
 	Q_PROPERTY(QString body READ body NOTIFY bodyChanged)
+	Q_PROPERTY(int length READ length NOTIFY lengthChanged)
 
 public:
 	explicit Message(QObject *parent = 0, const QString & body = "no body", const QString & author = "me");
 	QString body() { return m_body; }
 	QString author() { return m_Author; }
+	int length() { return body().size(); }
 
 signals:
 	void bodyChanged(QString newBody);
+	void lengthChanged(int theLength);
 
 public slots:
 

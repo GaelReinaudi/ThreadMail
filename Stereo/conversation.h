@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include "message.h"
+#include <QSignalMapper>
 
 class Conversation : public QObject
 {
@@ -21,7 +22,9 @@ public:
     
 signals:
 	void messagesChanged(QList<QObject*> newMessages);
+	void messageAdded(Message* pNewMessage);
 	void authorsChanged(QStringList newAuthors);
+	void authorAdded(QString author);
 
 public slots:
 	void addMessage(Message* pNewMessage) {
@@ -29,8 +32,29 @@ public slots:
 		m_Messages.append(pNewMessage);
 		m_AuthorsMessages.insert(pNewMessage->author(), pNewMessage);
 		emit messagesChanged(m_Messages);
-		if(oneMoreAuthor)
+		emit messageAdded(pNewMessage);
+		if(oneMoreAuthor) {
 			emit authorsChanged(authors());
+			emit authorAdded(pNewMessage->author());
+		}
+		qDebug() << "message added";
+	}
+	void addMessageObject(QObject* pNewMessage = 0) {
+		Message* pMess = qobject_cast<Message*>(pNewMessage);
+		if(pMess)
+			addMessage(pMess);
+		else
+			qDebug() << "message not added";
+	}
+	void addMessageTimer(Message* pMess, int ms) {
+		QTimer* ptimer = new QTimer(this);
+		ptimer->setInterval(ms);
+		ptimer->setSingleShot(true);
+		QSignalMapper* signalMapper = new QSignalMapper(this);
+		signalMapper->setMapping(ptimer, pMess);
+		connect(ptimer, SIGNAL(timeout()), signalMapper, SLOT(map()));
+		connect(signalMapper, SIGNAL(mapped(QObject*)), this, SLOT(addMessageObject(QObject*)));
+		ptimer->start();
 	}
 
 private:

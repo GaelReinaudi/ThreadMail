@@ -6,6 +6,6 @@ Message::Message(QObject *parent, const QString & body, const QString & author) 
 {
 	m_body = body;
 	emit bodyChanged(m_body);
-
+	emit lengthChanged(length());
 	m_Author = author;
 }

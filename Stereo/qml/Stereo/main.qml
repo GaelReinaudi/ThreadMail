@@ -29,16 +29,19 @@ Rectangle {
 			ListView {
 				id: listttt
 				anchors.fill: parent
-				//model: conv.messages
 
 				delegate: Rectangle {
-					width: parent.width;
-					height: 30
+					id: messageRect
+					width: parent.width
+					height: childrenRect.height
 					border.width: 1
 					color: "lightsteelblue"
+
 					Text {
-						anchors.centerIn: parent
+						id: bodyText
+						width: parent.width
 						text: model.modelData.body
+						wrapMode: Text.Wrap
 					}
 				}
 

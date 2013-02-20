@@ -14,6 +14,7 @@
 #include <QtCore/QDir>
 #include <QtQml/QQmlEngine>
 #include <QQmlContext>
+#include <QTextStream>
 
 #include "../conversation.h"
 
@@ -77,10 +78,28 @@ void QtQuick2ApplicationViewer::MakeConversation()
 	Conversation* pConv = new Conversation(this);
 	rootContext()->setContextProperty("conv", pConv);
 
+	QList<Message*> AllMessages;
+	QStringList fileContent;
 
-	pConv->addMessage(new Message(this, "blaaaaaaaaaaaaaaaaaaaaaaaaaaa"));
-	pConv->addMessage(new Message(this, "blaasafsdfasfsfsaaaaaa"));
-	pConv->addMessage(new Message(this, "blaaaaaaaaaaaaaaaaaagrtwqtwetgwrgsaaaaaa"));
-	pConv->addMessage(new Message(this, "blaaaaaaaaaaaaaaaaaaaaaaafsgsagasgaaaa"));
-	pConv->addMessage(new Message(this, "blaaaaaaaaaaaaaaaaaaaaaaaasadgasdgsdgawrghqrwhgqrhgrecv65148f98w17f8aaa"));
+	QFile file(":/convfile");
+	if(!file.open(QIODevice::ReadOnly)) {
+		qDebug() << "can't open";
+		return;
+	}
+	QTextStream in(&file);
+	fileContent = in.readAll().split("*****", QString::SkipEmptyParts);
+//	qDebug() << "content" << fileContent;
+	file.close();
+
+	foreach(QString authMess, fileContent) {
+		QStringList am = authMess.split("-----", QString::SkipEmptyParts);
+//		qDebug() << am;
+		if(am.size() < 2)
+			continue;
+		AllMessages.append(new Message(this, am[1], am[0]));
+	}
+
+	foreach(Message* pMess, AllMessages) {
+		pConv->addMessage(pMess);
+	}
 }

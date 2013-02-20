@@ -8,10 +8,12 @@ class Message : public QObject
 {
     Q_OBJECT
 	Q_PROPERTY(QString body READ body NOTIFY bodyChanged)
+
 public:
 	explicit Message(QObject *parent = 0, const QString & body = "no body", const QString & author = "me");
 	QString body() { return m_body; }
-    
+	QString author() { return m_Author; }
+
 signals:
 	void bodyChanged(QString newBody);
 
@@ -19,6 +21,7 @@ public slots:
 
 private:
 	QString m_body;
+	QString m_Author;
     
 };
 

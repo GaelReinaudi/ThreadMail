@@ -30,6 +30,66 @@ Rectangle {
 				anchors.fill: parent
 				source: "qrc:/background.png"
 			}
+			Rectangle{
+				id: scroller
+				width: parent.width;
+
+			}
+
+			Column {
+				anchors.fill: parent
+				GridView {
+					id: authorGrid
+					width: parent.width;
+					height: 30;
+					model: conv.authors
+					delegate: Rectangle {
+						width: (parent.width) / 4
+						height: 30
+						color: "orange"
+						radius: 6
+						antialiasing: true
+						Text {
+							id: authText
+							anchors.centerIn: parent
+							text: model.modelData
+						}
+					}
+				}
+
+				ListView {
+					id: threadList
+					model: conv.messages
+					width: parent.width;
+					height: parent.height - authorGrid.height
+					anchors.margins: 1
+					spacing: 0
+					delegate: Rectangle {
+						id:bbb
+						width: threadList.width
+						height: threadList.height * model.modelData.ratio
+						color: "transparent"
+						objectName: model.modelData.author
+						border.width: 1
+						border.color: "purple"
+						GridView {
+							anchors.fill: parent
+							model: conv.authors
+							delegate: Rectangle {
+								width: 60
+								height: parent.parent.height
+								color: "transparent"
+								radius: 10
+								antialiasing: true
+								Component.onCompleted: {
+									if(bbb.objectName == model.modelData)
+										color = "red"
+								}
+							}
+						}
+					}
+				}
+			}
 		}
 
 		Rectangle {
@@ -69,15 +129,15 @@ Rectangle {
 							font.weight: Font.Light
 						}
 					}
-					DropShadow {
-						anchors.fill: parent
-						horizontalOffset: 10
-						verticalOffset: 10
-						radius: 4.0
-						samples: 8
-						//color: "#000000"
-						source: messageRect
-					}
+					//					DropShadow {
+					//						anchors.fill: parent
+					//						horizontalOffset: 10
+					//						verticalOffset: 10
+					//						radius: 4.0
+					//						samples: 8
+					//						//color: "#000000"
+					//						source: messageRect
+					//					}
 				}
 
 				add: Transition {

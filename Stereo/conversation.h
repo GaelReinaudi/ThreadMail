@@ -19,7 +19,8 @@ public:
 	QStringList authors() {
 		return m_AuthorsMessages.keys();
 	}
-    
+	double length();
+
 signals:
 	void messagesChanged(QList<QObject*> newMessages);
 	void messageAdded(Message* pNewMessage);

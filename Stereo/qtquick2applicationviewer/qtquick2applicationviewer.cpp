@@ -15,6 +15,7 @@
 #include <QtQml/QQmlEngine>
 #include <QQmlContext>
 #include <QTextStream>
+#include <QQuickItem>
 
 #include "../conversation.h"
 
@@ -78,6 +79,9 @@ void QtQuick2ApplicationViewer::MakeConversation()
 	Conversation* pConv = new Conversation(this);
 	rootContext()->setContextProperty("conv", pConv);
 
+	QObject* rootObject = qobject_cast<QObject*>(this->rootObject());
+	QObject::connect(pConv, SIGNAL(messageAdded(Message*)), rootObject, SLOT(addMessage(Message*)));
+
 	QList<Message*> AllMessages;
 	QStringList fileContent;
 
@@ -96,13 +100,13 @@ void QtQuick2ApplicationViewer::MakeConversation()
 //		qDebug() << am;
 		if(am.size() < 2)
 			continue;
-		AllMessages.append(new Message(this, am[1], am[0]));
+		AllMessages.append(new Message(pConv, am[1], am[0]));
 	}
 
 	int i = 0;
 	foreach(Message* pMess, AllMessages) {
-		pConv->addMessage(pMess);
-//		pConv->addMessageTimer(pMess, 1000 * i);
+//		pConv->addMessage(pMess);
+		pConv->addMessageTimer(pMess, 300 * i);
 		i++;
 	}
 }

@@ -34,7 +34,7 @@ Rectangle {
 
 		Rectangle {
 			id: messagePane
-			color: Qt.rgba(0.8, 0.8, 0.8, 1);
+            color: Qt.rgba(0.9, 0.9, 0.9, 1);
 			width: parent.width * 0.65;
 			height: parent.height;
 
@@ -42,14 +42,14 @@ Rectangle {
 				id: listttt
 //				model: conv.messages
 				anchors.fill: parent
-				anchors.margins: 5
-				spacing: 5
+                anchors.margins: 15
+                spacing: 15
 
 				delegate: Rectangle {
 					id: messageRect
 					width: parent.width
 					height: childrenRect.height
-					color: Qt.rgba(0.9, 0.9, 0.9, 1)
+                    color: Qt.rgba(0.95, 0.95, 0.95, 1)
 					radius: 2
                     antialiasing: true
 
@@ -57,11 +57,13 @@ Rectangle {
 						id: bodyText
 						anchors.left: parent.left
 						anchors.right: parent.right
-						anchors.rightMargin: 5
-						anchors.leftMargin: 5
+                        anchors.rightMargin: 10
+                        anchors.leftMargin: 10
 						//width: parent.width
 						wrapMode: Text.Wrap
 						text: model.modelData.body
+                        font.family: "Helvetica neue"
+                        font.weight: Font.Light
 					}
                 }
 

@@ -25,14 +25,11 @@ Rectangle {
 			color: "blue";
 			width: parent.width * 0.35;
 			height: parent.height;
-			Image{
-				anchors.fill: parent
-				source: "qrc:/background.png"
-			}
-			ListView{
-				id: threadPane
-				anchors.fill: parent
-			}
+
+            Image{
+                anchors.fill: parent
+                source: "qrc:/background.png"
+            }
 		}
 
 		Rectangle {
@@ -54,7 +51,7 @@ Rectangle {
 					height: childrenRect.height
 					color: Qt.rgba(0.9, 0.9, 0.9, 1)
 					radius: 2
-					antialiasing: true
+                    antialiasing: true
 
 					Text {
 						id: bodyText
@@ -66,7 +63,7 @@ Rectangle {
 						wrapMode: Text.Wrap
 						text: model.modelData.body
 					}
-				}
+                }
 
 				add: Transition {
 					NumberAnimation { property: "opacity"; from: 0; to: 1.0; duration: 400 }
@@ -83,14 +80,21 @@ Rectangle {
 		}
 	}
 
-
 	MouseArea {
 		anchors.fill: parent
 		onClicked: {
-//			listttt.model = conv.messages
-			Qt.quit();
+			listttt.model = conv.messages
 		}
 	}
+    DropShadow {
+        anchors.fill: messageRect
+        horizontalOffset: 0
+        verticalOffset: 0
+        radius: 4.0
+        samples: 8
+        color: "#000000"
+        source: messageRect
+    }
 
 	Component.onCompleted: {
 		//listttt.model = conv.messages

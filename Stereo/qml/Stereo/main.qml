@@ -26,15 +26,15 @@ Rectangle {
 			width: parent.width * 0.35;
 			height: parent.height;
 
-            Image{
-                anchors.fill: parent
-                source: "qrc:/background.png"
-            }
+			Image{
+				anchors.fill: parent
+				source: "qrc:/background.png"
+			}
 		}
 
 		Rectangle {
 			id: messagePane
-            color: Qt.rgba(0.9, 0.9, 0.9, 1);
+			color: Qt.rgba(0.9, 0.9, 0.9, 1);
 			width: parent.width * 0.65;
 			height: parent.height;
 
@@ -42,37 +42,41 @@ Rectangle {
 				id: listttt
 				model: conv.messages
 				anchors.fill: parent
-                anchors.margins: 15
-                spacing: 15
+				anchors.margins: 15
+				spacing: 15
 
 				delegate: Rectangle {
-					id: messageRect
 					width: parent.width
 					height: childrenRect.height
-                    color: Qt.rgba(0.95, 0.95, 0.95, 1)
-					radius: 2
-                    antialiasing: true
+					Rectangle {
+						id: messageRect
+						width: parent.width
+						height: childrenRect.height
+						color: Qt.rgba(0.95, 0.95, 0.95, 1)
+						radius: 2
+						antialiasing: true
 
-					Text {
-						id: bodyText
-						anchors.left: parent.left
-						anchors.right: parent.right
-                        anchors.rightMargin: 10
-                        anchors.leftMargin: 10
-						//width: parent.width
-						wrapMode: Text.Wrap
-						text: model.modelData.body
-                        font.family: "Helvetica neue"
-                        font.weight: Font.Light
-						DropShadow {
-							anchors.fill: parent
-							horizontalOffset: 0
-							verticalOffset: 0
-							radius: 4.0
-							samples: 8
-							color: "#000000"
-							source: messageRect
+						Text {
+							id: bodyText
+							anchors.left: parent.left
+							anchors.right: parent.right
+							anchors.rightMargin: 10
+							anchors.leftMargin: 10
+							//width: parent.width
+							wrapMode: Text.Wrap
+							text: model.modelData.body
+							font.family: "Helvetica neue"
+							font.weight: Font.Light
 						}
+					}
+					DropShadow {
+						anchors.fill: parent
+						horizontalOffset: 10
+						verticalOffset: 10
+						radius: 4.0
+						samples: 8
+						//color: "#000000"
+						source: messageRect
 					}
 				}
 
@@ -95,7 +99,7 @@ Rectangle {
 	MouseArea {
 		anchors.fill: parent
 		onClicked: {
-//			listttt.model = conv.messages
+			//			listttt.model = conv.messages
 			Qt.quit()
 		}
 	}

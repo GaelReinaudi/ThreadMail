@@ -64,8 +64,17 @@ Rectangle {
 						text: model.modelData.body
                         font.family: "Helvetica neue"
                         font.weight: Font.Light
+						DropShadow {
+							anchors.fill: parent
+							horizontalOffset: 0
+							verticalOffset: 0
+							radius: 4.0
+							samples: 8
+							color: "#000000"
+							source: messageRect
+						}
 					}
-                }
+				}
 
 				add: Transition {
 					NumberAnimation { property: "opacity"; from: 0; to: 1.0; duration: 400 }
@@ -90,15 +99,6 @@ Rectangle {
 			Qt.quit()
 		}
 	}
-    DropShadow {
-        anchors.fill: messageRect
-        horizontalOffset: 0
-        verticalOffset: 0
-        radius: 4.0
-        samples: 8
-        color: "#000000"
-        source: messageRect
-    }
 
 	Component.onCompleted: {
 		//listttt.model = conv.messages

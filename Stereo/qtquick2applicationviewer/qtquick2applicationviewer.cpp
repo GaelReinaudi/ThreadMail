@@ -101,8 +101,8 @@ void QtQuick2ApplicationViewer::MakeConversation()
 
 	int i = 0;
 	foreach(Message* pMess, AllMessages) {
-//		pConv->addMessage(pMess);
-		pConv->addMessageTimer(pMess, 1000 * i);
+		pConv->addMessage(pMess);
+//		pConv->addMessageTimer(pMess, 1000 * i);
 		i++;
 	}
 }

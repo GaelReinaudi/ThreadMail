@@ -23,7 +23,7 @@ public:
 
 signals:
 	void messagesChanged(QList<QObject*> newMessages);
-	void messageAdded(Message* pNewMessage);
+	void messageAdded(QObject* pNewMessage);
 	void authorsChanged(QStringList newAuthors);
 	void authorAdded(QString author);
 

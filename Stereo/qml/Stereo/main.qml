@@ -12,8 +12,8 @@ Rectangle {
 	function addAuthor(text) {
 		threadPane.add();
 	}
-	function addMessage(mess) {
-		listttt.model.insert(0, mess);
+	function addMessage() {
+		scroller.height = listttt.height / listttt.contentHeight * scroller.parent.height;
 	}
 
 
@@ -29,11 +29,6 @@ Rectangle {
 			Image{
 				anchors.fill: parent
 				source: "qrc:/background.png"
-			}
-			Rectangle{
-				id: scroller
-				width: parent.width;
-
 			}
 
 			Column {
@@ -86,6 +81,24 @@ Rectangle {
 										color = "red"
 								}
 							}
+						}
+					}
+					Rectangle {
+						id: scroller
+						width: parent.width;
+						//height: listttt.height / listttt.contentHeight * scroller.parent.height;
+						color: Qt.rgba(0.95, 0.95, 0.95, 0.3)
+						MouseArea {
+							anchors.fill: parent
+							drag.target: scroller
+							drag.axis: Drag.YAxis
+							drag.minimumY: 0
+							drag.maximumY: parent.parent.height - scroller.height
+						}
+						onYChanged: {
+							//var p = listttt.itemAt(0, y / parent.height * listttt.height / listttt.visibleArea.heightRatio);
+							//listttt.positionViewAtIndex(p, ListView.Center );
+							listttt.contentY = y / parent.height * listttt.height / listttt.visibleArea.heightRatio;
 						}
 					}
 				}
@@ -156,13 +169,12 @@ Rectangle {
 	}
 
 
-	MouseArea {
-		anchors.fill: parent
-		onClicked: {
-			//			listttt.model = conv.messages
-			Qt.quit()
-		}
-	}
+//	MouseArea {
+//		anchors.fill: parent
+//		onClicked: {
+//			Qt.quit()
+//		}
+//	}
 
 	Component.onCompleted: {
 		//listttt.model = conv.messages

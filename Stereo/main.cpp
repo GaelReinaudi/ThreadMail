@@ -15,10 +15,11 @@ int main(int argc, char *argv[])
 	QtQuick2ApplicationViewer viewer;
 	viewer.showExpanded();
 
-	viewer.MakeConversation();
 
 	viewer.m_QmlFile = "qml/Stereo/main.qml";
 	viewer.ReloadQmlFile();
+
+	viewer.MakeConversation();
 
 
 //	QTimer reloader;

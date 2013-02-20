@@ -80,7 +80,7 @@ void QtQuick2ApplicationViewer::MakeConversation()
 	rootContext()->setContextProperty("conv", pConv);
 
 	QObject* rootObject = qobject_cast<QObject*>(this->rootObject());
-	QObject::connect(pConv, SIGNAL(messageAdded(Message*)), rootObject, SLOT(addMessage(Message*)));
+	QObject::connect(pConv, SIGNAL(messageAdded(QObject*)), rootObject, SLOT(addMessage()));
 
 	QList<Message*> AllMessages;
 	QStringList fileContent;

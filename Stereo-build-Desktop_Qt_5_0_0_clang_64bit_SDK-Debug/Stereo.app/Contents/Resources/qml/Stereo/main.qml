@@ -2,17 +2,33 @@ import QtQuick 2.0
 
 Rectangle {
 
-	width: 400
+	width: 500
 	height: 800
 
-	Image{
+	Row {
 		anchors.fill: parent
-		source: "qrc:/background.png"
+		spacing: 2
+		Rectangle {
+			id: threadPane
+			color: "blue";
+			width: parent.width / 2;
+			height: parent.height;
+			Image{
+				anchors.fill: parent
+				source: "qrc:/background.png"
+			}
+		}
+		Rectangle {
+			id: messagePane
+			color: "red";
+			width: parent.width / 2;
+			height: parent.height;
+		}
 	}
 
 	Text {
 		text: qsTr("Hello Worldddd")
-        color: "white"
+		color: "white"
 		anchors.centerIn: parent
 	}
 
@@ -20,6 +36,7 @@ Rectangle {
 	MouseArea {
 		anchors.fill: parent
 		onClicked: {
+			thread.messages;
 			Qt.quit();
 		}
 	}

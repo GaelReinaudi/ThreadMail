@@ -120,13 +120,23 @@ Rectangle {
 
 				delegate: Rectangle {
 					width: parent.width
-					height: childrenRect.height
+					height: bodyText.height
+					color: "transparent"
+					Rectangle {
+						id: hhh
+						x: 5
+						y: 5
+						width: parent.width
+						height: parent.height
+						color: "blue"
+					}
+
 					Rectangle {
 						id: messageRect
 						width: parent.width
-                        height: childrenRect.height
+						height: bodyText.height
 						color: Qt.rgba(0.95, 0.95, 0.95, 1)
-						radius: 2
+						radius: 20
 						antialiasing: true
 
                         Text {
@@ -142,17 +152,18 @@ Rectangle {
                             font.weight: Font.Light
                         }
 					}
-					//					DropShadow {
-					//						anchors.fill: parent
-					//						horizontalOffset: 10
-					//						verticalOffset: 10
-					//						radius: 4.0
-					//						samples: 8
-					//						//color: "#000000"
-					//						source: messageRect
-					//					}
+//					DropShadow {
+//						anchors.fill: parent
+//						horizontalOffset: 10
+//						verticalOffset: 10
+//						radius: 40
+//						samples: 80
+//						cached: true
+//						fast: true
+//						//color: "#000000"
+//						source: messageRect
+//					}
 				}
-
 				add: Transition {
 					NumberAnimation { property: "opacity"; from: 0; to: 1.0; duration: 400 }
 					NumberAnimation { property: "scale"; from: 0; to: 1.0; duration: 400 }

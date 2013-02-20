@@ -16,6 +16,10 @@ Rectangle {
             color: Qt.rgba(0.9, 0.9, 0.9, 1);
 			width: parent.width / 2;
 			height: parent.height;
+//			Image{
+//				anchors.fill: parent
+//				source: "qrc:/background.png"
+//			}
 		}
 		Rectangle {
 			id: messagePane
@@ -35,7 +39,7 @@ Rectangle {
 					height: childrenRect.height
                     color: Qt.rgba(0.95, 0.95, 0.95, 1)
 					radius: 2
-                    antialiasing: true
+					antialiasing: true
 
 					Text {
 						anchors.left: parent.left
@@ -50,7 +54,7 @@ Rectangle {
                         font.family: "Helvetica Neue"
                         font.weight: Font.Light
 					}
-                }
+				}
 
 				add: Transition {
 					NumberAnimation { property: "opacity"; from: 0; to: 1.0; duration: 400 }
@@ -67,20 +71,21 @@ Rectangle {
 		}
 	}
 
+//	Text {
+//		id: textttt
+//		text: "Hello"
+//		//text: thread.messages[0].body;
+//		color: "white"
+//		anchors.centerIn: parent
+//	}
+
+
 	MouseArea {
 		anchors.fill: parent
 		onClicked: {
 			listttt.model = conv.messages
+//			Qt.quit();
 		}
 	}
-    DropShadow {
-        anchors.fill: messageRect
-        horizontalOffset: 0
-        verticalOffset: 0
-        radius: 4.0
-        samples: 8
-        color: "#000000"
-        source: messageRect
-    }
 
 }

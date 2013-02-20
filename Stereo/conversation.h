@@ -7,16 +7,16 @@
 class Conversation : public QObject
 {
     Q_OBJECT
-	Q_PROPERTY(QList<Message*> messages READ messages NOTIFY messagesChanged)
+    Q_PROPERTY(QList<QObject*> messages READ messages NOTIFY messagesChanged)
 
 public:
     explicit Conversation(QObject *parent = 0);
-	QList<Message*> messages() {
+    QList<QObject*> messages() {
 		return m_Messages;
 	}
     
 signals:
-	void messagesChanged(QList<Message*> newMessages);
+    void messagesChanged(QList<QObject*> newMessages);
     
 public slots:
 	void addMessage(Message* pNewMessage) {
@@ -25,7 +25,7 @@ public slots:
 	}
 
 private:
-	QList<Message*> m_Messages;
+    QList<QObject*> m_Messages;
     
 };
 

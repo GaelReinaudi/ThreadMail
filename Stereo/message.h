@@ -7,7 +7,7 @@ class Message : public QObject
 {
     Q_OBJECT
 public:
-	explicit Message(QObject *parent = 0);
+    explicit Message(QObject *parent, const QString & body);
     
 signals:
     

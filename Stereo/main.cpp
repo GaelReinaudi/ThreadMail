@@ -12,6 +12,8 @@ int main(int argc, char *argv[])
 	viewer.m_QmlFile = "qml/Stereo/main.qml";
 	viewer.ReloadQmlFile();
 
+    viewer.MakeConversation();
+
 //	QTimer reloader;
 //	reloader.setInterval(1000);
 //	QObject::connect(&reloader, SIGNAL(timeout()), &viewer, SLOT(ReloadQmlFile()), Qt::QueuedConnection);

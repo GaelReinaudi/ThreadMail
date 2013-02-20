@@ -111,23 +111,23 @@ Rectangle {
 					Rectangle {
 						id: messageRect
 						width: parent.width
-						height: childrenRect.height
+                        height: childrenRect.height
 						color: Qt.rgba(0.95, 0.95, 0.95, 1)
 						radius: 2
 						antialiasing: true
 
-						Text {
-							id: bodyText
-							anchors.left: parent.left
-							anchors.right: parent.right
-							anchors.rightMargin: 10
-							anchors.leftMargin: 10
-							//width: parent.width
-							wrapMode: Text.Wrap
-							text: model.modelData.body
-							font.family: "Helvetica neue"
-							font.weight: Font.Light
-						}
+                        Text {
+                            id: bodyText
+                            anchors.left: parent.left
+                            anchors.right: parent.right
+                            anchors.rightMargin: 10
+                            anchors.leftMargin: 10
+                            //width: parent.width
+                            wrapMode: Text.Wrap
+                            text: model.modelData.body
+                            font.family: "Helvetica neue"
+                            font.weight: Font.Light
+                        }
 					}
 					//					DropShadow {
 					//						anchors.fill: parent

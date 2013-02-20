@@ -1,10 +1,11 @@
 import QtQuick 2.0
+import QtGraphicalEffects 1.0
 import basalt.Message 1.0
 import basalt.Conversation 1.0
 
 Rectangle {
 
-	width: 500
+	width: 800
 	height: 800
 
 	Row {
@@ -22,24 +23,31 @@ Rectangle {
 		}
 		Rectangle {
 			id: messagePane
-			color: "red";
+			color: Qt.rgba(0.8, 0.8, 0.8, 1);
 			width: parent.width / 2;
 			height: parent.height;
 
 			ListView {
 				id: listttt
 				anchors.fill: parent
+				anchors.margins: 5
+				spacing: 5
 
 				delegate: Rectangle {
 					id: messageRect
 					width: parent.width
 					height: childrenRect.height
-					border.width: 1
-					color: "lightsteelblue"
+					color: Qt.rgba(0.9, 0.9, 0.9, 1)
+					radius: 2
+					antialiasing: true
 
 					Text {
+						anchors.left: parent.left
+						anchors.right: parent.right
+						anchors.rightMargin: 5
+						anchors.leftMargin: 5
 						id: bodyText
-						width: parent.width
+						//width: parent.width
 						text: model.modelData.body
 						wrapMode: Text.Wrap
 					}

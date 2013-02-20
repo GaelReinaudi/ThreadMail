@@ -22,7 +22,7 @@ Rectangle {
 		anchors.fill: parent
 		spacing: 2
 		Rectangle {
-			color: "blue";
+            color: Qt.rgba(0.9, 0.9, 0.9, 1);
 			width: parent.width * 0.35;
 			height: parent.height;
 

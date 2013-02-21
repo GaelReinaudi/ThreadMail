@@ -121,8 +121,14 @@ Rectangle {
 							drag.minimumY: 0
 							drag.maximumY: parent.parent.height - scroller.height
 						}
+						Text {
+							id: dragText
+							text: "drag me"
+						}
+
 						onYChanged: {
 							listttt.contentY = listttt.originY + y / (threadList.height - scroller.height) * (conv.length - listttt.height);
+							dragText.text = ""
 						}
 					}
 				}
@@ -190,11 +196,11 @@ Rectangle {
 					}
 				}
 				add: Transition {
-					NumberAnimation { property: "opacity"; from: 0; to: 1.0; duration: 400 }
-					NumberAnimation { property: "scale"; from: 0; to: 1.0; duration: 400 }
+					NumberAnimation { property: "opacity"; from: 0; to: 1.0; duration: 600 }
+					NumberAnimation { property: "scale"; from: 0; to: 1.0; duration: 600 }
 				}
 				displaced: Transition {
-					NumberAnimation { properties: "x,y"; duration: 400; easing.type: Easing.OutBounce }
+					NumberAnimation { properties: "x,y"; duration: 600; easing.type: Easing.OutBounce }
 					NumberAnimation { property: "opacity"; to: 1.0 }
 					NumberAnimation { property: "scale"; to: 1.0 }
 				}

@@ -28,6 +28,7 @@ Rectangle {
 		anchors.fill: parent
 		spacing: 2
 		Rectangle {
+			id: threadPane
 			color: Qt.rgba(0.9, 0.9, 0.9, 1);
 			width: parent.width * 0.35;
 			height: parent.height;
@@ -83,7 +84,7 @@ Rectangle {
 								width: (parent.width) / 4
 								height: parent.parent.height
 								color: "transparent"
-								radius: 10
+								radius: 4
 								antialiasing: true
 								Component.onCompleted: {
 									if(bbb.objectName == author)
@@ -130,8 +131,8 @@ Rectangle {
 
 		Rectangle {
 			id: messagePane
-			color: Qt.rgba(0.9, 0.9, 0.9, 1);
-			width: parent.width * 0.65;
+			color: Qt.rgba(0.59, 0.59, 0.9, 1);
+			width: parent.width - threadPane.width;
 			height: parent.height;
 
 			ListView {
@@ -153,7 +154,7 @@ Rectangle {
 						width: parent.width
 						height: bodyText.height
 						color: Qt.rgba(0.95, 0.95, 0.95, 1)
-						radius: 20
+						radius: 3
 						antialiasing: true
 
 						Text {
@@ -177,8 +178,8 @@ Rectangle {
 
 					DropShadow {
 						anchors.fill: deleg
-						horizontalOffset: 8
-						verticalOffset: 8
+						horizontalOffset: 0//1
+						verticalOffset: 2
 						radius: 2
 						samples: 16
 						//fast: true

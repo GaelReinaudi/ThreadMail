@@ -97,9 +97,9 @@ Rectangle {
 						}
 					}
 					add: Transition {
-						NumberAnimation { property: "opacity"; from: 0; to: 1.0; duration: 600 }
+						NumberAnimation { property: "opacity"; from: 0; to: 1.0; duration: 400 }
 						SequentialAnimation {
-							NumberAnimation { property: "scale"; from: 0; to: 1.0; duration: 600 }
+							NumberAnimation { property: "scale"; from: 0; to: 1.0; duration: 400 }
 							//ColorAnimation { property: "color"; to: "yellow"; duration: 200 }
 							//ColorAnimation { property: "color"; to: "transparent"; duration: 200 }
 						}
@@ -123,6 +123,7 @@ Rectangle {
 						}
 						Text {
 							id: dragText
+							anchors.centerIn: parent
 							text: "drag me"
 						}
 

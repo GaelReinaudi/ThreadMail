@@ -116,7 +116,7 @@ Rectangle {
 					add: Transition {
 						NumberAnimation { property: "opacity"; from: 0; to: 1.0; duration: 600 }
 						SequentialAnimation {
-							NumberAnimation { property: "scale"; from: 0; to: 1.0; duration: 600 }
+							//NumberAnimation { property: "scale"; from: 0; to: 1.0; duration: 100 }
 							//ColorAnimation { property: "color"; to: "yellow"; duration: 200 }
 							//ColorAnimation { property: "color"; to: "transparent"; duration: 200 }
 						}

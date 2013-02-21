@@ -106,7 +106,7 @@ void QtQuick2ApplicationViewer::MakeConversation()
 
 	int i = 0;
 	foreach(Message* pMess, AllMessages) {
-		//if(i < 9)
+		//if(i < 16)
 		{
 //			pConv->addMessage(pMess);
 			pConv->addMessageTimer(pMess, 1000 );

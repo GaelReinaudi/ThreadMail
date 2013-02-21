@@ -29,14 +29,14 @@ Rectangle {
 		spacing: 2
 		Rectangle {
 			id: threadPane
-			color: Qt.rgba(0.9, 0.9, 0.9, 1);
+            color: Qt.rgba(88/255, 153/255, 190/255, 1);
 			width: parent.width * 0.35;
 			height: parent.height;
 
-			Image{
-				anchors.fill: parent
-				source: "qrc:/background.png"
-			}
+//			Image{
+//				anchors.fill: parent
+//				source: "qrc:/background.png"
+//			}
 			Column {
 				anchors.fill: parent
 				GridView {
@@ -47,8 +47,8 @@ Rectangle {
 					delegate: Rectangle {
 						width: (parent.width) / 4
 						height: 30
-						color: "orange"
-						radius: 6
+                        color: Qt.rgba(255/255, 216/255, 122/255, 1)
+                        radius: 3
 						antialiasing: true
 						Text {
 							id: authText
@@ -88,7 +88,7 @@ Rectangle {
 								antialiasing: true
 								Component.onCompleted: {
 									if(bbb.objectName == author)
-										color = "red"
+                                        color = Qt.rgba(0.95, 0.95, 0.95, 1)
 								}
 							}
 						}
@@ -131,7 +131,7 @@ Rectangle {
 
 		Rectangle {
 			id: messagePane
-			color: Qt.rgba(0.59, 0.59, 0.9, 1);
+            color: Qt.rgba(189/255, 231/255, 255/255, 1);
 			width: parent.width - threadPane.width;
 			height: parent.height;
 

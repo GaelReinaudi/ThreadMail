@@ -23,31 +23,33 @@ Rectangle {
 		spacing: 2
 		Rectangle {
 			color: Qt.rgba(0.9, 0.9, 0.9, 1);
-			width: parent.width * 0.35;
+            width: 200;
 			height: parent.height;
 
-			Image{
-				anchors.fill: parent
-				source: "qrc:/background.png"
-			}
+//			Image{
+//				anchors.fill: parent
+//				source: "qrc:/background.png"
+//			}
 
 			Column {
 				anchors.fill: parent
 				GridView {
 					id: authorGrid
-					width: parent.width;
+                    width: parent.width;
 					height: 30;
-					model: conv.authors
+                    model: conv.authors
 					delegate: Rectangle {
-						width: (parent.width) / 4
-						height: 30
-						color: "orange"
-						radius: 6
+                        width: (parent.width) / 3
+                        height: 20
+                        color: Qt.rgba(0.95, 0.95, 0.95, 1)
+                        radius: 2
 						antialiasing: true
 						Text {
 							id: authText
-							anchors.centerIn: parent
-							text: model.modelData
+                            anchors.centerIn: parent
+                            text: model.modelData
+                            font.family: "Helvetica neue"
+                            font.weight: Font.Light
 						}
 					}
 				}
@@ -65,20 +67,18 @@ Rectangle {
 						height: threadList.height * model.modelData.ratio
 						color: "transparent"
 						objectName: model.modelData.author
-						border.width: 1
-						border.color: "purple"
 						GridView {
 							anchors.fill: parent
 							model: conv.authors
-							delegate: Rectangle {
+                            delegate: Rectangle {
 								width: 60
 								height: parent.parent.height
 								color: "transparent"
-								radius: 10
+                                radius: 2
 								antialiasing: true
 								Component.onCompleted: {
 									if(bbb.objectName == model.modelData)
-										color = "red"
+                                        color = Qt.rgba(0.5, 0.5, 0.5, 1)
 								}
 							}
 						}
@@ -108,7 +108,7 @@ Rectangle {
 		Rectangle {
 			id: messagePane
 			color: Qt.rgba(0.9, 0.9, 0.9, 1);
-			width: parent.width * 0.65;
+            width: parent.width * 600;
 			height: parent.height;
 
 			ListView {
@@ -138,7 +138,7 @@ Rectangle {
 						width: parent.width
 						height: bodyText.height
 						color: Qt.rgba(0.95, 0.95, 0.95, 1)
-						radius: 20
+                        radius: 4
 						antialiasing: true
 
 						Text {
@@ -160,14 +160,15 @@ Rectangle {
 					}
 
 					DropShadow {
-						anchors.fill: deleg
-						horizontalOffset: 8
-						verticalOffset: 8
-						radius: 2
+                        width: deleg.width
+                        height: deleg.height
+                        horizontalOffset: 0
+                        verticalOffset: 2
+                        radius: 2
 						samples: 16
 						//fast: true
 						//transparentBorder : true
-						color: "#80000000"
+                        color: Qt.rgba(0, 0, 0, 0.2)
 						source: messageRect
 						cached: true
 					}

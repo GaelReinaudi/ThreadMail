@@ -119,6 +119,7 @@ Rectangle {
 				spacing: 15
 
 				delegate: Rectangle {
+					id: deleg
 					width: parent.width
 					height: bodyText.height
 					color: "transparent"
@@ -128,7 +129,7 @@ Rectangle {
 						y: 5
 						width: parent.width
 						height: parent.height
-						color: "blue"
+						color: "transparent"
 					}
 
 					Rectangle {
@@ -151,6 +152,18 @@ Rectangle {
 							font.family: "Helvetica neue"
 							font.weight: Font.Light
 						}
+					}
+					DropShadow {
+						anchors.fill: deleg
+						horizontalOffset: 8
+						verticalOffset: 8
+						radius: 2
+						samples: 16
+						//fast: true
+						//transparentBorder : true
+						color: "#80000000"
+						source: messageRect
+						cached: true
 					}
 				}
 				add: Transition {

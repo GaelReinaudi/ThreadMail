@@ -23,7 +23,7 @@ Rectangle {
 		spacing: 2
 		Rectangle {
 			color: Qt.rgba(0.9, 0.9, 0.9, 1);
-            width: 200;
+            width: parent.width * 0.35;
 			height: parent.height;
 
 //			Image{
@@ -108,7 +108,7 @@ Rectangle {
 		Rectangle {
 			id: messagePane
 			color: Qt.rgba(0.9, 0.9, 0.9, 1);
-            width: parent.width * 600;
+            width: parent.width * 0.65;
 			height: parent.height;
 
 			ListView {
@@ -122,7 +122,7 @@ Rectangle {
 				delegate: Rectangle {
 					id: deleg
 					width: parent.width
-					height: bodyText.height
+                    height: bodyText.height
 					color: "transparent"
 //					Rectangle {
 //						id: hhh

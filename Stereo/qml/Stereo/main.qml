@@ -13,7 +13,7 @@ Rectangle {
 		threadPane.add();
 	}
 	function addMessage() {
-		scroller.height = listttt.height / listttt.contentHeight * scroller.parent.height;
+//		scroller.height = listttt.height / listttt.contentHeight * scroller.parent.height;
 	}
 
 
@@ -86,7 +86,7 @@ Rectangle {
 					Rectangle {
 						id: scroller
 						width: parent.width;
-						//height: listttt.height / listttt.contentHeight * scroller.parent.height;
+						//height: listttt.height / conv.length * threadList.height;
 						color: Qt.rgba(0.95, 0.95, 0.95, 0.3)
 						MouseArea {
 							anchors.fill: parent
@@ -98,7 +98,7 @@ Rectangle {
 						onYChanged: {
 							//var p = listttt.itemAt(0, y / parent.height * listttt.height / listttt.visibleArea.heightRatio);
 							//listttt.positionViewAtIndex(p, ListView.Center );
-							listttt.contentY = y / (threadList.height - scroller.height) * listttt.height / 0.35;
+							listttt.contentY = y / (threadList.height - scroller.height) * (conv.length - listttt.height) // 3.2;
 						}
 					}
 				}
@@ -117,20 +117,21 @@ Rectangle {
 				anchors.fill: parent
 				anchors.margins: 15
 				spacing: 15
+				cacheBuffer: 2000
 
 				delegate: Rectangle {
 					id: deleg
 					width: parent.width
 					height: bodyText.height
 					color: "transparent"
-					Rectangle {
-						id: hhh
-						x: 5
-						y: 5
-						width: parent.width
-						height: parent.height
-						color: "transparent"
-					}
+//					Rectangle {
+//						id: hhh
+//						x: 5
+//						y: 5
+//						width: parent.width
+//						height: parent.height
+//						color: "transparent"
+//					}
 
 					Rectangle {
 						id: messageRect
@@ -153,6 +154,11 @@ Rectangle {
 							font.weight: Font.Light
 						}
 					}
+					Component.onCompleted: {
+						model.modelData.length = messageRect.height + 13//parent.spacing;
+						scroller.height = listttt.height / conv.length * threadList.height
+					}
+
 					DropShadow {
 						anchors.fill: deleg
 						horizontalOffset: 8

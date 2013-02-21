@@ -13,6 +13,15 @@ double Conversation::length()
 		if(pMess)
 			theLength += pMess->length();
 	}
+	emit lengthChanged(theLength);
+//	foreach(QObject* mess, messages()) {
+//		Message* pMess = qobject_cast<Message*>(mess);
+//		if(pMess)
+//			emit pMess->ratioChanged(pMess->length() / theLength);
+//	}
+//	Message* pMess = qobject_cast<Message*>(messages().last());
+//	if(pMess)
+//		emit pMess->ratioChanged(pMess->length() / theLength);
 
 	return theLength;
 }

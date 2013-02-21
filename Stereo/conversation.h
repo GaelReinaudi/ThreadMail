@@ -10,6 +10,7 @@ class Conversation : public QObject
     Q_OBJECT
 	Q_PROPERTY(QList<QObject*> messages READ messages NOTIFY messagesChanged)
 	Q_PROPERTY(QStringList authors READ authors NOTIFY authorsChanged)
+	Q_PROPERTY(double length READ length NOTIFY lengthChanged)
 
 public:
     explicit Conversation(QObject *parent = 0);
@@ -26,6 +27,7 @@ signals:
 	void messageAdded(QObject* pNewMessage);
 	void authorsChanged(QStringList newAuthors);
 	void authorAdded(QString author);
+	void lengthChanged(double newLength);
 
 public slots:
 	void addMessage(Message* pNewMessage) {

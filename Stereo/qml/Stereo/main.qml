@@ -22,7 +22,7 @@ Rectangle {
 		anchors.fill: parent
 		spacing: 2
 		Rectangle {
-            color: Qt.rgba(0.9, 0.9, 0.9, 1);
+			color: Qt.rgba(0.9, 0.9, 0.9, 1);
 			width: parent.width * 0.35;
 			height: parent.height;
 
@@ -98,7 +98,7 @@ Rectangle {
 						onYChanged: {
 							//var p = listttt.itemAt(0, y / parent.height * listttt.height / listttt.visibleArea.heightRatio);
 							//listttt.positionViewAtIndex(p, ListView.Center );
-							listttt.contentY = y / parent.height * listttt.height / listttt.visibleArea.heightRatio;
+							listttt.contentY = y / (threadList.height - scroller.height) * listttt.height / 0.35;
 						}
 					}
 				}
@@ -139,30 +139,19 @@ Rectangle {
 						radius: 20
 						antialiasing: true
 
-                        Text {
-                            id: bodyText
-                            anchors.left: parent.left
-                            anchors.right: parent.right
-                            anchors.rightMargin: 10
-                            anchors.leftMargin: 10
-                            //width: parent.width
-                            wrapMode: Text.Wrap
-                            text: model.modelData.body
-                            font.family: "Helvetica neue"
-                            font.weight: Font.Light
-                        }
+						Text {
+							id: bodyText
+							anchors.left: parent.left
+							anchors.right: parent.right
+							anchors.rightMargin: 10
+							anchors.leftMargin: 10
+							//width: parent.width
+							wrapMode: Text.Wrap
+							text: model.modelData.body
+							font.family: "Helvetica neue"
+							font.weight: Font.Light
+						}
 					}
-//					DropShadow {
-//						anchors.fill: parent
-//						horizontalOffset: 10
-//						verticalOffset: 10
-//						radius: 40
-//						samples: 80
-//						cached: true
-//						fast: true
-//						//color: "#000000"
-//						source: messageRect
-//					}
 				}
 				add: Transition {
 					NumberAnimation { property: "opacity"; from: 0; to: 1.0; duration: 400 }
@@ -180,12 +169,12 @@ Rectangle {
 	}
 
 
-//	MouseArea {
-//		anchors.fill: parent
-//		onClicked: {
-//			Qt.quit()
-//		}
-//	}
+	//	MouseArea {
+	//		anchors.fill: parent
+	//		onClicked: {
+	//			Qt.quit()
+	//		}
+	//	}
 
 	Component.onCompleted: {
 		//listttt.model = conv.messages

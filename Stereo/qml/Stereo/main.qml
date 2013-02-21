@@ -57,8 +57,8 @@ Rectangle {
 						}
 					}
 					add: Transition {
-						NumberAnimation { property: "opacity"; from: 0; to: 1.0; duration: 400 }
-						NumberAnimation { property: "scale"; from: 0; to: 1.0; duration: 400 }
+						NumberAnimation { property: "opacity"; from: 0; to: 1.0; duration: 600 }
+						NumberAnimation { property: "scale"; from: 0; to: 1.0; duration: 600 }
 					}
 				}
 
@@ -97,9 +97,9 @@ Rectangle {
 						}
 					}
 					add: Transition {
-						NumberAnimation { property: "opacity"; from: 0; to: 1.0; duration: 400 }
+						NumberAnimation { property: "opacity"; from: 0; to: 1.0; duration: 600 }
 						SequentialAnimation {
-							NumberAnimation { property: "scale"; from: 0; to: 1.0; duration: 400 }
+							NumberAnimation { property: "scale"; from: 0; to: 1.0; duration: 600 }
 							//ColorAnimation { property: "color"; to: "yellow"; duration: 200 }
 							//ColorAnimation { property: "color"; to: "transparent"; duration: 200 }
 						}
@@ -181,8 +181,8 @@ Rectangle {
 						horizontalOffset: 0//1
 						verticalOffset: 2
 						radius: 2
-						samples: 16
-						//fast: true
+						samples: 4
+						fast: true
 						//transparentBorder : true
 						color: "#80000000"
 						source: messageRect

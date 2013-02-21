@@ -81,14 +81,31 @@ Rectangle {
 							anchors.fill: parent
 							model: authModel
 							delegate: Rectangle {
+								id: delegRibbon
 								width: (parent.width) / 4
 								height: parent.parent.height
 								color: "transparent"
-								radius: 4
-								antialiasing: true
-								Component.onCompleted: {
-									if(bbb.objectName == author)
-                                        color = Qt.rgba(0.95, 0.95, 0.95, 1)
+								Rectangle {
+									id: rectRibbon
+									anchors.fill: parent
+									color: "transparent"
+									radius: 4
+									antialiasing: true
+									Component.onCompleted: {
+										if(bbb.objectName == author)
+											color = Qt.rgba(0.95, 0.95, 0.95, 1)
+									}
+								}
+								DropShadow {
+									anchors.fill: delegRibbon
+									horizontalOffset: 0//1
+									verticalOffset: 1
+									radius: 2
+									samples: 2
+									fast: true
+									color: "#80000000"
+									source: rectRibbon
+									cached: true
 								}
 							}
 						}
@@ -97,9 +114,9 @@ Rectangle {
 						}
 					}
 					add: Transition {
-						NumberAnimation { property: "opacity"; from: 0; to: 1.0; duration: 400 }
+						NumberAnimation { property: "opacity"; from: 0; to: 1.0; duration: 600 }
 						SequentialAnimation {
-							NumberAnimation { property: "scale"; from: 0; to: 1.0; duration: 400 }
+							NumberAnimation { property: "scale"; from: 0; to: 1.0; duration: 600 }
 							//ColorAnimation { property: "color"; to: "yellow"; duration: 200 }
 							//ColorAnimation { property: "color"; to: "transparent"; duration: 200 }
 						}
@@ -188,7 +205,7 @@ Rectangle {
 						horizontalOffset: 0//1
 						verticalOffset: 2
 						radius: 2
-						samples: 4
+						samples: 2
 						fast: true
 						//transparentBorder : true
 						color: "#80000000"

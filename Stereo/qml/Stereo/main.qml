@@ -155,7 +155,7 @@ Rectangle {
 
 		Rectangle {
 			id: messagePane
-            color: Qt.rgba(189/255, 231/255, 255/255, 1);
+            color: Qt.rgba(188/255, 220/255, 242/255, 1);//Qt.rgba(189/255, 231/255, 255/255, 1);
 			width: parent.width - threadPane.width;
 			height: parent.height;
 

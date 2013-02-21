@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import QtGraphicalEffects 1.0
+//import QtQuick.Particles 2.0
 import basalt.Message 1.0
 import basalt.Conversation 1.0
 
@@ -9,14 +10,19 @@ Rectangle {
 	width: 800
 	height: 800
 
-	function addAuthor(text) {
-		threadPane.add();
+	function addAuthor(auth) {
+		authModel.append({"author": auth})
 	}
-	function addMessage() {
-//		scroller.height = listttt.height / listttt.contentHeight * scroller.parent.height;
+	function addMessage(authName, messBody) {
+		messModel.insert(0, {"author": authName, "body": messBody, "length": 100.0})
 	}
 
-
+	ListModel {
+		id: messModel
+	}
+	ListModel {
+		id: authModel
+	}
 
 	Row {
 		anchors.fill: parent
@@ -30,14 +36,13 @@ Rectangle {
 				anchors.fill: parent
 				source: "qrc:/background.png"
 			}
-
 			Column {
 				anchors.fill: parent
 				GridView {
 					id: authorGrid
 					width: parent.width;
 					height: 30;
-					model: conv.authors
+					model: authModel
 					delegate: Rectangle {
 						width: (parent.width) / 4
 						height: 30
@@ -47,14 +52,18 @@ Rectangle {
 						Text {
 							id: authText
 							anchors.centerIn: parent
-							text: model.modelData
+							text: model.author
 						}
+					}
+					add: Transition {
+						NumberAnimation { property: "opacity"; from: 0; to: 1.0; duration: 400 }
+						NumberAnimation { property: "scale"; from: 0; to: 1.0; duration: 400 }
 					}
 				}
 
 				ListView {
 					id: threadList
-					model: conv.messages
+					model: messModel
 					width: parent.width;
 					height: parent.height - authorGrid.height
 					anchors.margins: 1
@@ -62,31 +71,47 @@ Rectangle {
 					delegate: Rectangle {
 						id:bbb
 						width: threadList.width
-						height: threadList.height * model.modelData.ratio
+						height: threadList.height * model.length / conv.length
 						color: "transparent"
-						objectName: model.modelData.author
+						objectName: author
 						border.width: 1
-						border.color: "purple"
+						border.color: Qt.rgba(0.95, 0.0, 0.95, 0.1)
 						GridView {
 							anchors.fill: parent
-							model: conv.authors
+							model: authModel
 							delegate: Rectangle {
-								width: 60
+								width: (parent.width) / 4
 								height: parent.parent.height
 								color: "transparent"
 								radius: 10
 								antialiasing: true
 								Component.onCompleted: {
-									if(bbb.objectName == model.modelData)
+									if(bbb.objectName == author)
 										color = "red"
 								}
 							}
 						}
+						Component.onCompleted: {
+							//height = threadList.height * model.length / conv.length;
+						}
+					}
+					add: Transition {
+						NumberAnimation { property: "opacity"; from: 0; to: 1.0; duration: 400 }
+						SequentialAnimation {
+							NumberAnimation { property: "scale"; from: 0; to: 1.0; duration: 400 }
+							//ColorAnimation { property: "color"; to: "yellow"; duration: 200 }
+							//ColorAnimation { property: "color"; to: "transparent"; duration: 200 }
+						}
+					}
+					displaced: Transition {
+						NumberAnimation { properties: "x,y"; duration: 1000; easing.type: Easing.OutBounce }
+						NumberAnimation { property: "opacity"; to: 1.0 }
+						NumberAnimation { property: "scale"; to: 1.0 }
+						//ColorAnimation { property: "color"; to: "transparent"; duration: 400 }
 					}
 					Rectangle {
 						id: scroller
 						width: parent.width;
-						//height: listttt.height / conv.length * threadList.height;
 						color: Qt.rgba(0.95, 0.95, 0.95, 0.3)
 						MouseArea {
 							anchors.fill: parent
@@ -96,9 +121,7 @@ Rectangle {
 							drag.maximumY: parent.parent.height - scroller.height
 						}
 						onYChanged: {
-							//var p = listttt.itemAt(0, y / parent.height * listttt.height / listttt.visibleArea.heightRatio);
-							//listttt.positionViewAtIndex(p, ListView.Center );
-							listttt.contentY = y / (threadList.height - scroller.height) * (conv.length - listttt.height) // 3.2;
+							listttt.contentY = listttt.originY + y / (threadList.height - scroller.height) * (conv.length - listttt.height);
 						}
 					}
 				}
@@ -113,25 +136,17 @@ Rectangle {
 
 			ListView {
 				id: listttt
-				model: conv.messages
+				model: messModel
 				anchors.fill: parent
 				anchors.margins: 15
 				spacing: 15
-				cacheBuffer: 2000
+				cacheBuffer: 20000
 
 				delegate: Rectangle {
 					id: deleg
 					width: parent.width
 					height: bodyText.height
 					color: "transparent"
-//					Rectangle {
-//						id: hhh
-//						x: 5
-//						y: 5
-//						width: parent.width
-//						height: parent.height
-//						color: "transparent"
-//					}
 
 					Rectangle {
 						id: messageRect
@@ -149,13 +164,14 @@ Rectangle {
 							anchors.leftMargin: 10
 							//width: parent.width
 							wrapMode: Text.Wrap
-							text: model.modelData.body
+							text: model.body
 							font.family: "Helvetica neue"
 							font.weight: Font.Light
 						}
 					}
 					Component.onCompleted: {
-						model.modelData.length = messageRect.height + 13//parent.spacing;
+						messModel.setProperty(index, "length", messageRect.height + 13)
+						conv.length = model.length + conv.length;
 						scroller.height = listttt.height / conv.length * threadList.height
 					}
 
@@ -176,9 +192,10 @@ Rectangle {
 					NumberAnimation { property: "opacity"; from: 0; to: 1.0; duration: 400 }
 					NumberAnimation { property: "scale"; from: 0; to: 1.0; duration: 400 }
 				}
-
 				displaced: Transition {
 					NumberAnimation { properties: "x,y"; duration: 400; easing.type: Easing.OutBounce }
+					NumberAnimation { property: "opacity"; to: 1.0 }
+					NumberAnimation { property: "scale"; to: 1.0 }
 				}
 
 				focus: true
@@ -186,8 +203,6 @@ Rectangle {
 			}
 		}
 	}
-
-
 	//	MouseArea {
 	//		anchors.fill: parent
 	//		onClicked: {
@@ -196,8 +211,6 @@ Rectangle {
 	//	}
 
 	Component.onCompleted: {
-		//listttt.model = conv.messages
-		threadPane.model = conv.messages
 	}
 
 }

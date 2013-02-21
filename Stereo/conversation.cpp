@@ -2,26 +2,19 @@
 
 Conversation::Conversation(QObject *parent) :
     QObject(parent)
+  , m_Length(0.0)
 {
 }
 
 double Conversation::length()
 {
-	double theLength = 1.0;
-	foreach(QObject* mess, messages()) {
-		Message* pMess = qobject_cast<Message*>(mess);
-		if(pMess)
-			theLength += pMess->length();
-	}
-	emit lengthChanged(theLength);
+//	double theLength = 1.0;
 //	foreach(QObject* mess, messages()) {
 //		Message* pMess = qobject_cast<Message*>(mess);
 //		if(pMess)
-//			emit pMess->ratioChanged(pMess->length() / theLength);
+//			theLength += pMess->length();
 //	}
-//	Message* pMess = qobject_cast<Message*>(messages().last());
-//	if(pMess)
-//		emit pMess->ratioChanged(pMess->length() / theLength);
+//	emit lengthChanged(m_Length);
 
-	return theLength;
+	return m_Length;
 }

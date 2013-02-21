@@ -80,7 +80,8 @@ void QtQuick2ApplicationViewer::MakeConversation()
 	rootContext()->setContextProperty("conv", pConv);
 
 	QObject* rootObject = qobject_cast<QObject*>(this->rootObject());
-	QObject::connect(pConv, SIGNAL(messageAdded(QObject*)), rootObject, SLOT(addMessage()));
+	QObject::connect(pConv, SIGNAL(messageAdded(QVariant, QVariant)), rootObject, SLOT(addMessage(QVariant, QVariant)));
+	QObject::connect(pConv, SIGNAL(authorAdded(QVariant)), rootObject, SLOT(addAuthor(QVariant)));
 
 	QList<Message*> AllMessages;
 	QStringList fileContent;
@@ -105,8 +106,14 @@ void QtQuick2ApplicationViewer::MakeConversation()
 
 	int i = 0;
 	foreach(Message* pMess, AllMessages) {
+		pConv->addMessage(pMess);
+//		pConv->addMessageTimer(pMess, 200 * i);
+		i++;
+	}
+	i = 0;
+	foreach(Message* pMess, AllMessages) {
 //		pConv->addMessage(pMess);
-		pConv->addMessageTimer(pMess, 200 * i);
+		pConv->addMessageTimer(pMess, 2000 * i);
 		i++;
 	}
 }

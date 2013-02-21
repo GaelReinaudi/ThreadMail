@@ -46,6 +46,5 @@ private:
 	double m_Length;
 };
 
-
 #endif // MESSAGE_H
 

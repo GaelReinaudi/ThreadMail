@@ -10,7 +10,7 @@ class Conversation : public QObject
     Q_OBJECT
 	Q_PROPERTY(QList<QObject*> messages READ messages NOTIFY messagesChanged)
 	Q_PROPERTY(QStringList authors READ authors NOTIFY authorsChanged)
-	Q_PROPERTY(double length READ length NOTIFY lengthChanged)
+	Q_PROPERTY(double length READ length WRITE setLength NOTIFY lengthChanged)
 
 public:
     explicit Conversation(QObject *parent = 0);
@@ -21,21 +21,25 @@ public:
 		return m_AuthorsMessages.keys();
 	}
 	double length();
+	void setLength(double theL) {
+		m_Length = theL;
+		emit lengthChanged(m_Length);
+	}
 
 signals:
 	void messagesChanged(QList<QObject*> newMessages);
-	void messageAdded(QObject* pNewMessage);
+	void messageAdded(QVariant authName, QVariant messBody);
 	void authorsChanged(QStringList newAuthors);
-	void authorAdded(QString author);
+	void authorAdded(QVariant author);
 	void lengthChanged(double newLength);
 
 public slots:
 	void addMessage(Message* pNewMessage) {
 		bool oneMoreAuthor  = !authors().contains(pNewMessage->author());
-		m_Messages.append(pNewMessage);
+		m_Messages.prepend(pNewMessage);
 		m_AuthorsMessages.insert(pNewMessage->author(), pNewMessage);
 		emit messagesChanged(m_Messages);
-		emit messageAdded(pNewMessage);
+		emit messageAdded(pNewMessage->author(), pNewMessage->body());
 		if(oneMoreAuthor) {
 			emit authorsChanged(authors());
 			emit authorAdded(pNewMessage->author());
@@ -63,6 +67,7 @@ public slots:
 private:
 	QList<QObject*> m_Messages;
 	QMap<QString, QObject*> m_AuthorsMessages;
+	double m_Length;
 
 };
 
